@@ -1,31 +1,13 @@
-language: cpp
+language: objective-c
 
-compiler:
-  - clang
-  - g++
+before_install:
+  - brew update
+  - brew outdated cmake || brew upgrade cmake
+  - brew outdated boost || brew upgrade boost
 
-install:
-  - if [ "$CXX" = "g++" ]; then export CXX="g++-5" CC="gcc-5"; fi
-
-before_script:
+script:
   - mkdir build
   - cd build
   - cmake ..
-
-script:
   - make
   - make test
-
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - clang
-    - gcc-5
-    - g++-5
-
-sudo: false
-
-cache:
-  - apt
