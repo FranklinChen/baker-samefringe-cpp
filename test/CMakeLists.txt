@@ -1,3 +1,3 @@
-add_executable(test1 test1.cpp catch.hpp)
+add_executable(tests tests.cpp test1.cpp samefringe.hpp catch.hpp)
 
-add_test(test1 test1)
+add_test(tests tests)
