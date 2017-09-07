@@ -3,12 +3,9 @@ language: cpp
 matrix:
   include:
     - os: osx
-      osx_image: xcode7
-      compiler: clang
 
 before_install:
   - brew update
-  - brew install cmake
   - brew outdated boost || brew upgrade boost
 
 script:
