@@ -2,16 +2,10 @@
 #define SAMEFRINGE_H
 
 #include <vector>
+#include <optional>
 
-// Coming in C++17?
-#if 0
-#include <experimental/any>
-#include <experimental/optional>
-#endif
-
-// Use Boost until C++17 comes out.
+// Use Boost because std::variant does not support recursion.
 #include <boost/variant.hpp>
-#include <boost/optional.hpp>
 
 /**
    Wrapper.
@@ -76,16 +70,16 @@ using Next = std::pair<const Leaf<A> &, const Generator<A> &>;
 
 template<typename A>
 struct Consumer
-    : public std::function<bool (boost::optional<Next<A>>)>{
+    : public std::function<bool (std::optional<Next<A>>)>{
     // Move into wrapper.
-    Consumer(std::function<bool (boost::optional<Next<A>>)> &&f)
-        : std::function<bool (boost::optional<Next<A>>)>(f) {}
+    Consumer(std::function<bool (std::optional<Next<A>>)> &&f)
+        : std::function<bool (std::optional<Next<A>>)>(f) {}
 };
 
 
 template<typename A>
 auto eof(const Consumer<A> &c) -> bool {
-    return c(boost::none);
+    return c(std::nullopt);
 }
 
 template<typename A>
@@ -126,7 +120,7 @@ auto gen_fringe(
 
         auto operator()(const Leaf<A> &leaf) const -> bool {
             const Next<A> next = std::make_pair(leaf, g);
-            return c(boost::make_optional(next));
+            return c(std::make_optional(next));
         }
 
         auto operator()(const std::vector<Tree<A>> &forest) const -> bool {
