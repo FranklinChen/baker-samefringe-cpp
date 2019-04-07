@@ -1,7 +1,11 @@
-# C++ implementation of Henry Baker's same-fringe code
+# C++17 implementation of Henry Baker's same-fringe code
 
 [![Build Status](https://travis-ci.org/FranklinChen/baker-samefringe-cpp.svg)](https://travis-ci.org/FranklinChen/baker-samefringe-cpp)
 
-Until C++17 comes along with a standard way of encoding algebraic data types as tagged unions, I'm using Boost's [variant](http://theboostcpplibraries.com/boost.variant).
+I use Boost's [variant](http://theboostcpplibraries.com/boost.variant)
+because C++17's [`std::variant`](https://en.cppreference.com/w/cpp/utility/variant) does not support recursive variant types.
 
-Currently only tested on Mac OS X with clang.
+Check out my implementations in other languages:
+
+- [Rust](https://github.com/FranklinChen/baker-samefringe-rust)
+- (others to come)
