@@ -6,7 +6,7 @@ matrix:
 
 before_install:
   - brew update
-  - brew outdated catch2 || brew upgrade catch2
+  - brew install catch2
   - brew outdated boost || brew upgrade boost
 
 script:
